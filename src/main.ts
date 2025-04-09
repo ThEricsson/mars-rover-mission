@@ -13,6 +13,13 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(PrimeVue, StylePreset)
+app.use(PrimeVue, {
+  theme: {
+    preset: StylePreset,
+    options: {
+      darkModeSelector: 'false',
+    },
+  },
+})
 
 app.mount('#app')
