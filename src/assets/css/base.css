@@ -15,12 +15,24 @@ body {
     sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
-  background-color: wheat;
+  background-color: #0d0d0d; /* Deep Space Black */
+}
+
+main h1 {
+  color: #b84a39; /* Mars Red */
+}
+
+main p {
+  color: #f5f5f5; /* White Smoke */
+}
+
+main {
+  color: whitesmoke;
 }
 
 .card {
-  background: rgb(180, 180, 180);
-  border: 3px solid #ccc;
+  background: #2e2e2e; /* Satellite Gray */
+  border: 3px solid #b84a39; /* Mars Red */
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 1rem;
