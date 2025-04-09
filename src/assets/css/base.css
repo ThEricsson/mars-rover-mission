@@ -15,25 +15,46 @@ body {
     sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
-  background-color: #0d0d0d; /* Deep Space Black */
+  background-color: #0d0d0d; /* Marcianísimo oscuro */
+  color: #f5f5f5;
 }
 
 main h1 {
-  color: #b84a39; /* Mars Red */
+  color: #ff6a00; /* Orbit Orange para títulos 🔥 */
+  text-shadow: 0 0 10px #b84a39;
 }
 
 main p {
-  color: #f5f5f5; /* White Smoke */
+  color: #cccccc;
 }
 
-main {
-  color: whitesmoke;
-}
-
-.card {
-  background: #2e2e2e; /* Satellite Gray */
-  border: 3px solid #b84a39; /* Mars Red */
+.card,
+.subcard {
+  background: linear-gradient(145deg, #2e1d1d, #3c2a2a); /* metálico marciano */
+  border: 2px solid #b84a39; /* Mars Red */
   padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 12px rgba(184, 74, 57, 0.4); /* halo rojo */
+  transition: all 0.3s ease-in-out;
+}
+
+.subcard:hover {
+  border-color: #ff6a00; /* Orbit Orange al pasar el ratón */
+  box-shadow: 0 0 20px rgba(255, 106, 0, 0.6);
+}
+
+button {
+  background-color: #00aeef; /* Signal Blue */
+  color: #0d0d0d;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #008ec9;
 }
