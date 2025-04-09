@@ -15,4 +15,13 @@ body {
     sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
+  background-color: wheat;
+}
+
+.card {
+  background: rgb(180, 180, 180);
+  border: 3px solid #ccc;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
