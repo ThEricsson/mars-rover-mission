@@ -1,0 +1,21 @@
+name: Check branch name to merge development
+on:
+  pull_request:
+    branches:
+      - development
+jobs:
+  check_branch_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate branch name is feature or bugfix
+        id: get_branch_name
+        run: |
+          echo "Getting the branch name"
+          branch_name=${{ github.event.pull_request.head.ref }}
+          if [[ "$branch_name" != "main" && ! "$branch_name" =~ ^(feature|bugfix)/.*$ ]]; then
+            echo "Branch name $branch_name is not in the correct format"
+            exit 1
+          fi
