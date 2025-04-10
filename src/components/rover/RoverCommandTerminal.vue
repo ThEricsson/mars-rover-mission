@@ -13,7 +13,7 @@ const roverStore = useRoverStore()
 // Errors
 // Methods
 const commandsHandler = (command: string) => {
-  let response: string = 'Unknown command:'
+  let response: string = ''
   const commandList = command.split('')
 
   commandList.map((commandLetter) => {
@@ -37,6 +37,10 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <div>
-    <Terminal welcomeMessage="Welcome to Rover Control Center" prompt="rover_directions $" />
+    <Terminal
+      style="background-color: black; color: green; border: 3px gray solid"
+      welcomeMessage="Welcome to Rover Control Center"
+      prompt="rover_directions $"
+    />
   </div>
 </template>
