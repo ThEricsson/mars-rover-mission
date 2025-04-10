@@ -39,8 +39,8 @@ onBeforeUnmount(() => {
   <div>
     <Terminal
       style="background-color: black; color: green; border: 3px gray solid"
-      welcomeMessage="Welcome to Rover Control Center"
-      prompt="rover_directions $"
+      welcomeMessage="Welcome to RCT! (Rover Control Terminal)"
+      prompt="rover_command $"
     />
   </div>
 </template>
