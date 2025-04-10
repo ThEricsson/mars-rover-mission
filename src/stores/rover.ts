@@ -15,7 +15,7 @@ export const useRoverStore = defineStore('roverStore', () => {
   const position = ref({ x: 0, y: 0 })
   const direction = ref<'N' | 'W' | 'S' | 'E'>('N')
 
-  const navigationHistory = ref<{ x: number; y: number }[]>([])
+  const navigationHistory = ref<Record<string, { x: number; y: number }>>({})
   const connected = ref(false)
 
   const move = (inputX: number, inputY: number) => {
@@ -26,7 +26,9 @@ export const useRoverStore = defineStore('roverStore', () => {
   const moveForward = () => {
     const [inputX, inputY] = cardinalPointTranslator[direction.value]
 
-    navigationHistory.value.push(position.value)
+    const now = new Date()
+
+    navigationHistory.value[now.toISOString()] = { ...position.value }
     move(inputX, inputY)
   }
 
