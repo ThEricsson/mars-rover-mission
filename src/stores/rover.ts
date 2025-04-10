@@ -1,6 +1,8 @@
 import { ref, readonly } from 'vue'
 import { defineStore } from 'pinia'
 
+import { CARDINAL_POSITIONS } from '@/constants/global'
+
 import { useTerrain } from '@/hooks/useTerrain'
 const { analiceTerrainDistance } = useTerrain()
 
@@ -10,10 +12,10 @@ const { findRoverPosition } = useRover()
 const terrainDistance = analiceTerrainDistance()
 
 export const useRoverStore = defineStore('roverStore', () => {
-  let cardinalDirections = ['W', 'S', 'E']
+  const MOVE_DISTANCE = 5
 
   const position = ref({ x: 0, y: 0 })
-  const direction = ref<'N' | 'W' | 'S' | 'E'>('N')
+  const direction = ref<'N' | 'E' | 'S' | 'W'>('N')
 
   const navigationHistory = ref<Record<string, { x: number; y: number }>>({})
   const connected = ref(false)
@@ -33,24 +35,20 @@ export const useRoverStore = defineStore('roverStore', () => {
   }
 
   const turnRight = () => {
-    let currentDirection = direction.value
-    let nextDirection = cardinalDirections.pop()!
-    cardinalDirections.unshift(currentDirection)
-    direction.value = nextDirection as 'N' | 'W' | 'S' | 'E'
+    const currentIndex = CARDINAL_POSITIONS.indexOf(direction.value)
+    direction.value = CARDINAL_POSITIONS[(currentIndex + 1) % 4] as 'N' | 'E' | 'S' | 'W'
   }
 
   const turnLeft = () => {
-    let currentDirection = direction.value
-    let nextDirection = cardinalDirections.shift()!
-    cardinalDirections.push(currentDirection)
-    direction.value = nextDirection as 'N' | 'W' | 'S' | 'E'
+    const currentIndex = CARDINAL_POSITIONS.indexOf(direction.value)
+    direction.value = CARDINAL_POSITIONS[(currentIndex + 3) % 4] as 'N' | 'E' | 'S' | 'W'
   }
 
   const cardinalPointTranslator = {
-    N: [0, 5],
-    S: [0, -5],
-    E: [5, 0],
-    W: [-5, 0],
+    N: [0, MOVE_DISTANCE],
+    S: [0, -MOVE_DISTANCE],
+    E: [MOVE_DISTANCE, 0],
+    W: [-MOVE_DISTANCE, 0],
   }
 
   const commandTranslator = {
@@ -61,11 +59,17 @@ export const useRoverStore = defineStore('roverStore', () => {
   const allowedCommands = Object.keys(commandTranslator)
 
   const commandReader = (commandLetter: 'F' | 'L' | 'R') => {
+    if (!allowedCommands.includes(commandLetter)) {
+      throw new Error(`Comando no permitido: ${commandLetter}`)
+    }
     commandTranslator[commandLetter]()
   }
 
   const findRover = () => {
-    position.value = findRoverPosition()
+    const cordenatesAndDirection = findRoverPosition()
+    position.value = { x: cordenatesAndDirection.x, y: cordenatesAndDirection.y }
+    direction.value = cordenatesAndDirection.cardinalPosition as 'N' | 'E' | 'S' | 'W'
+
     connected.value = true
   }
 
