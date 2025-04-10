@@ -28,9 +28,9 @@ main p {
   color: #cccccc;
 }
 
-.card,
-.subcard {
-  background: linear-gradient(145deg, #2e1d1d, #3c2a2a); /* metálico marciano */
+.content,
+.subContent {
+  background: linear-gradient(100deg, #2e1d1d, #3c2a2a); /* metálico marciano */
   border: 2px solid #b84a39; /* Mars Red */
   padding: 2rem;
   border-radius: 14px;
@@ -39,7 +39,7 @@ main p {
   transition: all 0.3s ease-in-out;
 }
 
-.subcard:hover {
+.subContent:hover {
   border-color: #ff6a00; /* Orbit Orange al pasar el ratón */
   box-shadow: 0 0 20px rgba(255, 106, 0, 0.6);
 }

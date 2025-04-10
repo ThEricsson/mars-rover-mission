@@ -6,7 +6,7 @@ import roverNoBg from '@/assets/imgs/roverNoBg.png'
 
 <template>
   <main class="h-screen flex flex-col justify-center">
-    <div class="card grid grid-cols-2 gap-4 mx-auto shadow-xl">
+    <div class="content grid grid-cols-2 gap-4 mx-auto shadow-xl">
       <div class="col text-center flex flex-col justify-center p-3">
         <h1 class="text-4xl font-bold">Mars Rover Mission</h1>
         <p class="text-lg">Mars Rover monitoring and motion control software</p>

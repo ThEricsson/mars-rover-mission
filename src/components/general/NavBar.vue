@@ -25,7 +25,7 @@ const menuItems = ref(
 </script>
 <template>
   <!-- No tengo decidido si añadir navbar -->
-  <!-- <div v-if="currentFullPath != '/'" class="card">
+  <!-- <div v-if="currentFullPath != '/'" class="content">
     <Menubar :model="menuItems" />
   </div> -->
 </template>
