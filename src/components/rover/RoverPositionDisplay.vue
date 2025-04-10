@@ -9,12 +9,15 @@ const roverStore = useRoverStore()
 // Methods
 </script>
 <template>
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-3 gap-4">
     <div class="content text-center">
       <p class="text-2xl">X → {{ roverStore.getRoverPosition().value.x }}</p>
     </div>
     <div class="content text-center">
       <p class="text-2xl">Y → {{ roverStore.getRoverPosition().value.y }}</p>
+    </div>
+    <div class="content text-center">
+      <p class="text-2xl">Direction → {{ roverStore.getRoverDirection().value }}</p>
     </div>
   </div>
 </template>
