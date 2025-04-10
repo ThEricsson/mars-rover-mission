@@ -21,7 +21,7 @@ const roverStore = useRoverStore()
       <div class="grid grid-cols-2 gap-4">
         <div class="subContent h-full pb-6">
           <div class="mt-3 h-full">
-            <div v-if="roverStore.getConnected().value">
+            <div class="h-full" v-if="roverStore.getConnected().value">
               <h2 class="text-3xl text-center mb-3">Command terminal</h2>
               <RoverCommandTerminal />
             </div>
@@ -33,7 +33,7 @@ const roverStore = useRoverStore()
             >
           </div>
         </div>
-        <div>
+        <div class="grid gap-4">
           <div class="subContent">
             <h2 class="text-3xl text-center">Command history</h2>
             <div class="mt-3">

@@ -21,7 +21,6 @@ main p {
   border: 2px solid #b84a39; /* Mars Red */
   padding: 2rem;
   border-radius: 14px;
-  margin-bottom: 1.5rem;
   box-shadow: 0 0 12px rgba(184, 74, 57, 0.4); /* halo rojo */
 }
 
@@ -29,6 +28,13 @@ main p {
   transition: all 0.3s ease-in-out;
   border-color: #ff6a00; /* Orbit Orange al pasar el ratón */
   box-shadow: 0 0 20px rgba(255, 106, 0, 0.6);
+}
+
+.footer {
+  background: linear-gradient(100deg, #2e1d1d, #3c2a2a); /* metálico marciano */
+  border-top: 2px solid #b84a39; /* Mars Red */
+  padding: 2rem;
+  box-shadow: 0 0 12px rgba(184, 74, 57, 0.4); /* halo rojo */
 }
 
 button {
