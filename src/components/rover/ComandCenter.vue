@@ -17,11 +17,10 @@ const commandsHandler = (command: string) => {
   const commandList = command.split('')
 
   commandList.map((commandLetter) => {
-    commandLetter.toLocaleUpperCase()
     if (!roverStore.allowedCommands.includes(commandLetter)) {
       response = `Invalid command found: ${commandLetter}`
     } else {
-      roverStore.commandReader(commandLetter)
+      roverStore.commandReader(commandLetter as 'F' | 'L' | 'R')
     }
   })
 
