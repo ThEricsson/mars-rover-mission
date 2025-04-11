@@ -25,12 +25,12 @@ export const useRoverStore = defineStore('roverStore', () => {
   }
 
   const moveBackward = () => {
-    const [inputX, inputY] = cardinalPointTranslator[direction.value]
+    const [inputX, inputY] = cardinalDirectionOffsets[direction.value]
     move(-inputX, -inputY)
   }
 
   const moveForward = () => {
-    const [inputX, inputY] = cardinalPointTranslator[direction.value]
+    const [inputX, inputY] = cardinalDirectionOffsets[direction.value]
     move(inputX, inputY)
 
     navigationHistory.value.push({ date: new Date(), ...position.value, successful: true })
@@ -58,7 +58,7 @@ export const useRoverStore = defineStore('roverStore', () => {
     direction.value = CARDINAL_POSITIONS[(currentIndex + 3) % 4] as 'N' | 'E' | 'S' | 'W'
   }
 
-  const cardinalPointTranslator = {
+  const cardinalDirectionOffsets = {
     N: [0, MOVE_DISTANCE],
     S: [0, -MOVE_DISTANCE],
     E: [MOVE_DISTANCE, 0],
