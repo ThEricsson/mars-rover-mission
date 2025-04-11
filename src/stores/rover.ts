@@ -40,7 +40,7 @@ export const useRoverStore = defineStore('roverStore', () => {
       if (lastMove) {
         navigationHistory.value.push({ ...lastMove, successful: false })
         moveBackward()
-        throw new Error(`Obstacle found at: (X ${lastMove.x}, Y ${lastMove.y})`)
+        throw new Error(`Obstacle found at: (X ${lastMove.x}, Y ${lastMove.y}); moving back`)
       }
 
       throw new Error('No navigation history')
