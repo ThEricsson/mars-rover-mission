@@ -1,18 +1,38 @@
 <script setup lang="ts">
 // Imports
-import { ScrollPanel } from 'primevue'
 import { useRoverStore } from '@/stores/rover'
+
+import { DataTable, Column } from 'primevue'
 // Props
 // Hooks
-const roverStore = useRoverStore()
+const { getNavigationHistory } = useRoverStore()
+const navigationHistory = getNavigationHistory().value || []
+
 // Values
 // Errors
 // Methods
 </script>
 <template>
-  <ScrollPanel class="grid grid-row h-50 bg-black p-3 border-3 border-gray-500 rounded-lg">
-    <div class="broder divide" v-for="position in roverStore.getNavigationHistory().value">
-      <p class="text-green-500">{{ position }}</p>
-    </div>
-  </ScrollPanel>
+  <DataTable
+    :value="navigationHistory"
+    style="max-height: 20rem; overflow-y: auto; height: 20rem"
+    stripedRows
+    showGridlines
+  >
+    <Column field="date" header="Timestamp">
+      <template #body="slotProps">
+        {{ slotProps.data.date.toLocaleString() }}
+      </template></Column
+    >
+    <Column field="x" header="X" />
+    <Column field="y" header="Y" />
+    <Column field="successful" header="Successful movement">
+      <template #body="slotProps">
+        <span
+          :class="slotProps.data.successful ? 'text-green-500 uppercase' : 'text-red-500 uppercase'"
+          >{{ slotProps.data.successful }}</span
+        >
+      </template>
+    </Column>
+  </DataTable>
 </template>
