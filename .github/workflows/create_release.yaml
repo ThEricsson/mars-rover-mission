@@ -1,0 +1,61 @@
+name: Create Tag and Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+jobs:
+  set_tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      IS_MERGED: ${{ github.event.pull_request.merged }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Checkout main branch
+        run: |
+          git fetch 
+          git checkout main
+
+      - name: Check if PR is merged
+        id: pr_is_merged
+        if: ${{github.event.pull_request.merged  == true}}
+        run: |
+          echo "This PR is merged, getting the branch name"
+          version=$(echo "${{ github.event.pull_request.head.ref }}" | grep -oP '\d+\.\d+\.\d+' )
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Configure Git and Create Tag
+        if: ${{github.event.pull_request.merged  == true}}
+        run: |
+          git config --global user.name "Condals Actions"
+          git config --global user.email "actions@condalsgroup.com"
+          version=${{ steps.pr_is_merged.outputs.version }}
+          echo "Creating tag for version $version"
+          git tag -a $version -m "Release $version"
+          echo "Pushing tag to origin"
+          echo "pushing tag using token $GITHUB_TOKEN"
+          git push origin $version
+      - name: Create Release
+        if: ${{github.event.pull_request.merged  == true}}
+        run: |
+          version=${{ steps.pr_is_merged.outputs.version }}
+          description="${{github.event.pull_request.body}}"
+          escaped_description=$(echo "$description" | jq -Rs .)
+          echo "Creating release for version $version"
+          echo "Creating release using token $GITHUB_TOKEN"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/releases \
+            -d '{"tag_name":"'"$version"'","name":"'"$version"'","body":'"$escaped_description"',"draft":false,"prerelease":false,"target_commitish":"main"}'
+
+      - name: Check if PR is not merged
+        id: pr_is_not_merged
+        if: ${{github.event.pull_request.merged == false}}
+        run: echo "This PR is not merged"
