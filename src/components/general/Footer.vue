@@ -1,7 +1,6 @@
 <template>
-  <footer class="footer py-4">
-    <div class="mx-auto text-center">
-      <p>&copy; 2025 Coded with ♥️ By Eric Roca Herrera.</p>
-    </div>
+  <footer class="text-center footer p-4">
+    <span>&copy; 2025 Coded with ♥️ By</span>
+    <a href="https://github.com/ThEricsson"> Eric Roca Herrera.</a>
   </footer>
 </template>

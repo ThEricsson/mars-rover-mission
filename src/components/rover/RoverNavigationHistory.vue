@@ -21,26 +21,30 @@ const navigationHistory = computed(() => {
 // Methods
 </script>
 <template>
-  <DataTable
-    :value="navigationHistory"
-    style="max-height: 20rem; overflow-y: auto; height: 20rem"
-    stripedRows
-    showGridlines
-  >
-    <Column field="date" header="Timestamp">
-      <template #body="slotProps">
-        {{ slotProps.data.date.toLocaleString() }}
-      </template></Column
+  <div>
+    <DataTable
+      :value="navigationHistory"
+      style="max-height: 20rem; overflow-y: auto; height: 20rem"
+      stripedRows
+      showGridlines
     >
-    <Column field="x" header="X" />
-    <Column field="y" header="Y" />
-    <Column field="successful" header="Successful movement">
-      <template #body="slotProps">
-        <span
-          :class="slotProps.data.successful ? 'text-green-500 uppercase' : 'text-red-500 uppercase'"
-          >{{ slotProps.data.successful }}</span
-        >
-      </template>
-    </Column>
-  </DataTable>
+      <Column field="date" header="Timestamp">
+        <template #body="slotProps">
+          {{ slotProps.data.date.toLocaleString() }}
+        </template></Column
+      >
+      <Column field="x" header="X" />
+      <Column field="y" header="Y" />
+      <Column field="successful" header="Successful movement">
+        <template #body="slotProps">
+          <span
+            :class="
+              slotProps.data.successful ? 'text-green-500 uppercase' : 'text-red-500 uppercase'
+            "
+            >{{ slotProps.data.successful }}</span
+          >
+        </template>
+      </Column>
+    </DataTable>
+  </div>
 </template>

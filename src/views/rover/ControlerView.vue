@@ -15,23 +15,21 @@ const roverStore = useRoverStore()
 // Methods
 </script>
 <template>
-  <main class="h-screen">
-    <div class="content m-6">
+  <main class="min-h-screen">
+    <div class="content mt-9 m-5">
       <h1 class="text-center text-4xl mb-4">Rover Control Center</h1>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="subContent h-full pb-6">
-          <div class="mt-3 h-full">
-            <div v-if="roverStore.getConnected().value">
-              <h2 class="text-3xl text-center mb-3">Command terminal</h2>
-              <RoverCommandTerminal />
-            </div>
-            <div v-else class="h-full flex flex-col items-center">
-              <Button class="w-full h-50" severity="success" @click="roverStore.findRover()"
-                ><i class="pi pi-link" style="font-size: 2.5rem" /><span class="text-4xl"
-                  >Connect to the rover</span
-                ></Button
-              >
-            </div>
+      <div class="grid md:grid-cols-2 gap-4 h-full">
+        <div class="subContent pb-6">
+          <div v-if="roverStore.getConnected().value">
+            <h2 class="text-3xl text-center mb-3">Command terminal</h2>
+            <RoverCommandTerminal />
+          </div>
+          <div v-else class="flex h-full items-center">
+            <Button class="w-full h-50" severity="success" @click="roverStore.findRover()"
+              ><i class="pi pi-link" style="font-size: 2.5rem" /><span class="text-4xl"
+                >Connect to the rover</span
+              ></Button
+            >
           </div>
         </div>
         <div class="grid gap-4">
