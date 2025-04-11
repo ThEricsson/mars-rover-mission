@@ -39,7 +39,7 @@ const commandsHandler = (command: string) => {
       roverStore.commandReader(commandLetter as 'F' | 'L' | 'R')
     })
   } catch (error) {
-    response = `Error: ${error}`
+    response = error ? String(error) : 'Unknown error'
   }
 
   TerminalService.emit('response', response)
