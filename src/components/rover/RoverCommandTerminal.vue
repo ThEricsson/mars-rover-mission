@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-  <div class="h-100">
+  <div class="h-full">
     <Terminal
       style="background-color: black; color: green; border: 3px gray solid"
       welcomeMessage="Welcome to RCT! (Rover Control Terminal)"
