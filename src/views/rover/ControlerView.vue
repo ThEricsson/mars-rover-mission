@@ -15,8 +15,8 @@ const roverStore = useRoverStore()
 // Methods
 </script>
 <template>
-  <main class="h-screen">
-    <div class="content m-6">
+  <main class="min-h-screen">
+    <div class="content m-5">
       <h1 class="text-center text-4xl mb-4">Rover Control Center</h1>
       <div class="grid md:grid-cols-2 gap-4 h-full">
         <div class="subContent pb-6">
