@@ -1,12 +1,20 @@
 <script setup lang="ts">
 // Imports
+import { ref, computed } from 'vue'
 import { useRoverStore } from '@/stores/rover'
 
 import { DataTable, Column } from 'primevue'
 // Props
 // Hooks
 const { getNavigationHistory } = useRoverStore()
-const navigationHistory = getNavigationHistory().value || []
+
+const navigationHistory = computed(() => {
+  const history = getNavigationHistory().value
+  if (history) {
+    return [...history]
+  }
+  return []
+})
 
 // Values
 // Errors
