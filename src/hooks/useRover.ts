@@ -1,20 +1,21 @@
-import { useTerrain } from '@/hooks/useTerrain'
+import { useTerrainStore } from '@/stores/terrain'
 
 import { CARDINAL_POSITIONS } from '@/constants/global'
-
-const { analiceTerrainDistance } = useTerrain()
+import { getRandomNumber } from '@/utils'
 
 export const useRover = () => {
   const findRoverPosition = () => {
-    const { x: terrainX, y: terrainY } = analiceTerrainDistance()
+    const { getTerrainSize } = useTerrainStore()
+    const { minX, maxX, minY, maxY } = getTerrainSize()
 
-    const x = Math.floor(Math.random() * (terrainX + 1))
-    const y = Math.floor(Math.random() * (terrainY + 1))
+    const x = getRandomNumber(minX, maxX)
+    const y = getRandomNumber(minY, maxY)
 
     const cardinalPosition =
       CARDINAL_POSITIONS[Math.floor(Math.random() * CARDINAL_POSITIONS.length)]
 
     return { x, y, cardinalPosition }
   }
+
   return { findRoverPosition }
 }

@@ -12,17 +12,35 @@ const roverStore = useRoverStore()
 // Values
 // Errors
 // Methods
-const commandsHandler = (command: string) => {
-  let response: string = ''
-  const commandList = command.split('')
+
+const checkComand = (commandList: string[]) => {
+  let isValid = true
 
   commandList.map((commandLetter) => {
     if (!roverStore.allowedCommands.includes(commandLetter)) {
-      response = `Invalid command found: ${commandLetter}`
-    } else {
-      roverStore.commandReader(commandLetter as 'F' | 'L' | 'R')
+      isValid = false
     }
   })
+
+  return isValid
+}
+
+const commandsHandler = (command: string) => {
+  let response: string = ''
+
+  try {
+    const commandList = command.split('')
+
+    if (!checkComand(commandList)) {
+      throw new Error('Invalid command; only F, L, and R are allowed')
+    }
+
+    commandList.map((commandLetter) => {
+      roverStore.commandReader(commandLetter as 'F' | 'L' | 'R')
+    })
+  } catch (error) {
+    response = `Error: ${error}`
+  }
 
   TerminalService.emit('response', response)
 }
