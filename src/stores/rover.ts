@@ -19,20 +19,18 @@ export const useRoverStore = defineStore('roverStore', () => {
 
   // Movements
   const move = (inputX: number, inputY: number) => {
+    console.log('Moving rover', { inputX, inputY })
     position.value.x += inputX
     position.value.y += inputY
   }
 
   const moveBackward = () => {
-    const lastSuccessfulMove = navigationHistory.value.find((position) => position.successful)
-    const { x, y } = lastSuccessfulMove || { x: 0, y: 0 }
-
-    move(x, y)
+    const [inputX, inputY] = cardinalPointTranslator[direction.value]
+    move(-inputX, -inputY)
   }
 
   const moveForward = () => {
     const [inputX, inputY] = cardinalPointTranslator[direction.value]
-
     move(inputX, inputY)
 
     navigationHistory.value.push({ date: new Date(), ...position.value, successful: true })
@@ -41,11 +39,11 @@ export const useRoverStore = defineStore('roverStore', () => {
       const lastMove = navigationHistory.value.pop()
       if (lastMove) {
         navigationHistory.value.push({ ...lastMove, successful: false })
+        moveBackward()
+        throw new Error(`Obstacle found at: (X ${lastMove.x}, Y ${lastMove.y})`)
       }
 
-      moveBackward()
-
-      throw new Error(`Obstacle found at: (X ${position.value.x}, Y ${position.value.y})`)
+      throw new Error('No navigation history')
     }
   }
 
